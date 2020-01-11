@@ -1,5 +1,41 @@
 <?php
 $title = 'Lista de chamados';
+class Chamado
+{
+    private $titulo;
+    private $prioridade;
+
+   function __construct($titulo, $prioridade)
+   {
+       $this->titulo = $titulo;
+       $this->prioridade = $prioridade;
+   }
+    public function getTitulo() 
+    {
+        return $this->titulo;
+    }
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+    }
+    public function getPrioridade()
+    {
+        return $this->prioridade;
+    }
+    public function setPrioridade($prioridade)
+    {
+        $this->prioridade = $prioridade;
+    }
+}
+
+$listaChamados = [
+    new Chamado("Cras alemanha odio", ["Alta", "danger"]),
+    new Chamado("Dapibus ac facilisis in", ["Média", "warning"]),
+    new Chamado("Morbi brasil risus", ["Baixa", "info"]),
+    new Chamado("Lorem ipsum dolor sit", ["Baixa", "info"]),
+    new Chamado("Lorem ipsum", ["Baixa", "info"])
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,30 +45,14 @@ $title = 'Lista de chamados';
         <div class="container">
             <h1 class="mb-4">Lista de chamados</h1>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="#" title="Ver datalhes">Cras alemanha odio</a>
-                    <span class="badge badge-danger badge-pill">Urgente</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Dapibus ac facilisis in
-                    <span class="badge badge-warning badge-pill">Prioritario</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Morbi brasil risus
-                    <span class="badge badge-info badge-pill">Novo</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Lorem ipsum dolor
-                    <span class="badge badge-info badge-pill">Novo</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Lorem ipsum dolor sit
-                    <span class="badge badge-info badge-pill">Novo</span>
-                </li>
-                <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
-                    Lorem ipsum
-                    <span class="badge badge-light badge-pill">Encerrado</span>
-                </li>
+                <?php foreach($listaChamados as $chamado) : ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="#" title="Ver datalhes"><?php echo $chamado->getTitulo(); ?></a>
+                        <span class="badge badge-<?php echo $chamado->getPrioridade()[1]; ?> badge-pill">
+                            <?php echo $chamado->getPrioridade()[0]; ?>
+                        </span>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </body>
